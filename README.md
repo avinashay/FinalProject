@@ -1,6 +1,6 @@
 # EECE5550 Mobile Robotics
 
-## Final Project Submission
+## Final Project Submission for Team RockSteady
 
 ### Commands On Raspi :
  step 1 :  connect to raspi
