@@ -34,7 +34,7 @@ step1 : Launch move_base navigation
 
 roslaunch turtlebot3_navigation move_base.launch 
 
-Install gmapping and explore lite packages ros packages before running below commands 
+Install gmapping and explore lite ros packages before running below commands 
 
 step2 : Launch Gmapping 
 
