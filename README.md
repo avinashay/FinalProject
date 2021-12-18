@@ -25,7 +25,7 @@ Check camera feed :
 
 rqt_image_view --force-discover
 
-# Direct Launch command for running above nodes on raspi:
+### Direct Launch command for running above nodes on raspi:
 
 roslaunch turtlebot_mr remote_rpi.launch 
 
@@ -48,6 +48,6 @@ step3 : Launch explore_lite
 
 roslaunch explore_lite explore_test.launch
 
-# Direct Launch command for running above nodes on local:
+### Direct Launch command for running above nodes on local:
 
 roslaunch turtlebot_mr final_project_local.launch 
