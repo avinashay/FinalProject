@@ -1,25 +1,55 @@
 # EECE5550 Mobile Robotics
 
-## LAB2
+## Final Project Submission
 
-Problem2: 
+### Commands On Raspi :
+ssh ubuntu@192.168.1.106
+turtlebot
 
-Step1: Open 2 terminals and source devel/setup.bash in catkin_ws folder
+cd ~/catkin_ws
+source devel/setup.bash
+roscore
 
-Step2: On one of the terminals, start a empty gazebo simulation using the command : roslaunch turtlebot3_gazebo turtlebot3_empty_world.launch
+cd ~/catkin_ws
+source devel/setup.bash
+roslaunch turtlebot3_bringup turtlebot3_robot.launch
 
-Step3: On the second terminal, publish the message : rostopic pub /cmd_vel geometry_msgs/Twist -r 10 '[0.2,0,0]' '[0,0,0.1333]'
+cd ~/catkin_ws
+source devel/setup.bash
+roslaunch raspicam_node camerav2_1280x960_10fps.launch enable_raw:=true
 
-Expected result: The turtlebot moves CCW in a circle with radius 1.5m and at linear velocity of 0.2m/s.
+cd ~/catkin_ws
+source devel/setup.bash
+rosrun tf static_transform_publisher 0.03 0 0.1 -1.57 0 -1.57 base_link camera 100
 
-Problem3:
+cd ~/catkin_ws
+source devel/setup.bash
+roslaunch turtlebot3_mr apriltag_gazebo.launch
 
-Step1: Open 3 terminals and source devel/setup.bash in catkin_ws folder
+### Commands on Local:
 
-Step2: On the first terminal, start a gazebo simulation with apriltag using the command: roslaunch turtlebot3_mr apriltag_gazebo.launch
+cd ~/catkin_ws
 
-Step3: On the second terminal, start a gazebo visualizer using the command: roslaunch turtlebot3_mr turtlebot3_lab2.launch
+source devel/setup.bash
+roscore
 
-Step4: On the third terminal, run the ros node using the command: rosrun mobile_robotics problem3.py
+source devel/setup.bash
+export TURTLEBOT3_MODEL=burger
+roslaunch turtlebot3_navigation move_base.launch 
 
-Expected Result: The turtlebot moves towards the apriltag and stops at a position 12cm in front of it.
+source devel/setup.bash
+export TURTLEBOT3_MODEL=burger
+roslaunch turtlebot3_slam turtlebot3_slam.launch slam_methods:=gmapping
+
+source devel/setup.bash
+roslaunch explore_lite explore_test.launch
+
+Check camera feed:
+rqt_image_view --force-discover
+
+Transfer yaml from local to remote:
+scp <file name> ubuntu@172.20.10.4:/home/ubuntu/.ros/camera_info
+
+Launch calibrator on local:
+python3 /opt/ros/noetic/lib/camera_calibration/cameracalibrator.py --size 7x6 --square 0.0254 image:=/raspicam_node/image camera:=/raspicam_node
+
